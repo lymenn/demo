@@ -1,0 +1,23 @@
+
+@import './sidebar.scss';
+html{
+    box-sizing: border-box;
+    height: 100%;
+}
+body{
+    height: 100%;
+    margin: 0;
+}
+#app{
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+.main-container{
+    margin-left: 180px;
+    height: 100%;
+}

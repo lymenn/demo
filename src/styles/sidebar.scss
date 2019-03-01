@@ -1,0 +1,27 @@
+
+#app{
+    .sidebar-container{
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        width: 180px;
+        background-color: rgb(48, 65, 86);
+        .el-menu{
+            border: none
+        }
+        .svg-icon{
+          margin-right: 16px;
+        }
+        .el-menu-item{
+            min-width: 180px;
+        }
+        .nest-menu .el-submenu__title,
+        .el-submenu .el-menu-item{
+            background-color: #1f2d3d !important;
+            &:hover{
+                background-color: #001528 !important;
+            }
+        }
+    }
+}
