@@ -1,5 +1,6 @@
 <template>
         <svg
+        @click="toggleClick"
         class="hamburger"
         :class="{'is-active':isActive}"
         viewBox="0 0 1024 1024"
@@ -11,6 +12,12 @@
 </template>
 <script>
 export default {
+  props: {
+    toggleClick: {
+      type: Function,
+      default: null
+    }
+  },
   data () {
     return {
       isActive: true
@@ -22,6 +29,7 @@ export default {
 .hamburger{
     width: 20px;
     height: 20px;
+    cursor: pointer;
 }
 .hamburger.is-active{
     transform: rotate(180deg);

@@ -1,4 +1,4 @@
-
+@import './variables.scss';
 @import './sidebar.scss';
 html{
     box-sizing: border-box;
@@ -21,3 +21,10 @@ body{
     margin-left: 180px;
     height: 100%;
 }
+.el-menu--vertical {
+    &>.el-menu {
+      .svg-icon {
+        margin-right: 16px;
+      }
+    }
+  }

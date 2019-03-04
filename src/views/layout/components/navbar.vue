@@ -1,6 +1,6 @@
 <template>
     <div class="navbar-container">
-        <Hamburger class="hamburger-container"></Hamburger>
+        <Hamburger class="hamburger-container" :toggle-click="toggleSidebar"></Hamburger>
         <breadcrumb></breadcrumb>
           <el-dropdown trigger="click" class="dropdown-container">
           <span class="el-dropdown-link">
@@ -21,6 +21,11 @@ export default {
   components: {
     Breadcrumb,
     Hamburger
+  },
+  methods: {
+    toggleSidebar: function () {
+      this.$store.dispatch('ToggleSideBar')
+    }
   }
 }
 </script>
@@ -38,6 +43,7 @@ export default {
       position: absolute;
       right: 10px;
       top: 5px;
+      cursor: pointer;
       .el-dropdown-link{
           img{
             width: 40px;

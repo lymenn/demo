@@ -15,6 +15,7 @@ export default new Router({
     {
       path: '/layout',
       name: 'layout',
+      meta: { title: 'Layout', icon: 'user' },
       component: Layout
     },
     {

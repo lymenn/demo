@@ -1,14 +1,49 @@
 <template>
     <el-breadcrumb separator="/" class="app-breadcrumb">
-        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-        <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-        <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-        <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
+            <span v-if="item.redirect==='noredirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
+            <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+        </el-breadcrumb-item>
     </el-breadcrumb>
 </template>
 <script>
-export default {
+import pathToRegexp from 'path-to-regexp'
 
+export default {
+  data () {
+    return {
+      levelList: null
+    }
+  },
+  created: function () {
+    this.getbBreadcrumb()
+    console.log(this.levelList)
+  },
+  methods: {
+    getbBreadcrumb () {
+      let matched = this.$route.matched.filter(item => item.name)
+
+      const first = matched[0]
+      if (first && first.name !== 'dashboard') {
+        matched = [{ path: '/dashboard', meta: { title: 'Dashboard' } }].concat(matched)
+      }
+      this.levelList = matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
+    },
+    handleLink (item) {
+      const { redirect, path } = item
+      if (redirect) {
+        this.$router.push(redirect)
+        return
+      }
+      this.$router.push(this.pathCompile(path))
+    },
+    pathCompile (path) {
+      // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
+      const { params } = this.$route
+      var toPath = pathToRegexp.compile(path)
+      return toPath(params)
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
