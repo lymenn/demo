@@ -1,5 +1,6 @@
 @import './variables.scss';
 @import './sidebar.scss';
+@import './transitions.scss';
 html{
     box-sizing: border-box;
     height: 100%;
@@ -18,13 +19,15 @@ body{
   box-sizing: inherit;
 }
 .main-container{
+    transition: margin-left 0.28s;
     margin-left: 180px;
     height: 100%;
 }
-.el-menu--vertical {
-    &>.el-menu {
-      .svg-icon {
-        margin-right: 16px;
-      }
-    }
-  }
+a,
+a:focus,
+a:hover {
+  cursor: pointer;
+  color: inherit;
+  outline: none;
+  text-decoration: none;
+}

@@ -8,6 +8,7 @@ import router from './router'
 import store from './store'
 import '@/styles/index.scss'
 import '@/icons'
+import '@/permission'
 Vue.use(ElementUI)
 Vue.config.productionTip = false
 

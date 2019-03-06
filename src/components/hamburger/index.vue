@@ -16,11 +16,10 @@ export default {
     toggleClick: {
       type: Function,
       default: null
-    }
-  },
-  data () {
-    return {
-      isActive: true
+    },
+    isActive: {
+      type: Boolean,
+      default: true
     }
   }
 }

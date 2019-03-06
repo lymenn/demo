@@ -1,7 +1,8 @@
 <template>
     <div class="appmain-container">
-        <h1>name:admin</h1>
-        <h1>name:admin</h1>
+        <transition mode="out-in" name="fade-transform">
+            <router-view></router-view>
+        </transition>
     </div>
 </template>
 <script>
@@ -11,6 +12,6 @@ export default {
 </script>
 <style lang="scss" scoped>
     .appmain-container{
-        padding: 30px;
+        padding: 20px;
     }
 </style>

@@ -1,9 +1,11 @@
 <template>
   <div class="menu-wrapper" v-if="!item.hidden && item.children">
     <template v-if="hasOneShowingChild(item.children, item)&& (!onlyOneChild.children||onlyOneChild.noShowingChildren)">
-      <el-menu-item :index="item.path" :class="{'submenu-title-noDropdown':!isNest}">
-          <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title"></item>
-      </el-menu-item>
+      <app-link :to="resolvePath(onlyOneChild.path)">
+        <el-menu-item :index="item.path" :class="{'submenu-title-noDropdown':!isNest}">
+            <item v-if="onlyOneChild.meta" :icon="onlyOneChild.meta.icon" :title="onlyOneChild.meta.title"></item>
+        </el-menu-item>
+      </app-link>
     </template>
     <template v-else>
       <el-submenu :index="resolvePath(item.path)">
@@ -18,11 +20,11 @@
           :key="child.path"
           :base-path="resolvePath(child.path)"
           class="nest-menu" />
-          <!-- <app-link v-else :to="resolvePath(child.path)" :key="child.name"> -->
-          <el-menu-item v-else :index="resolvePath(child.path)" :key="child.name">
-            <item v-if="child.meta" :icon="child.meta.icon" :title="child.meta.title" />
-          </el-menu-item>
-        <!-- </app-link> -->
+          <app-link v-else :to="resolvePath(child.path)" :key="child.name">
+            <el-menu-item :index="resolvePath(child.path)" >
+              <item v-if="child.meta" :icon="child.meta.icon" :title="child.meta.title" />
+            </el-menu-item>
+          </app-link>
         </template>
       </el-submenu>
     </template>
@@ -30,6 +32,7 @@
 </template>
 <script>
 import path from 'path'
+import { isExternal } from '@/utils'
 import Item from './item'
 import AppLink from './Link'
 export default {
@@ -73,12 +76,12 @@ export default {
         this.onlyOneChild = {...parent, path: '', noShowingChildren: true}
         return true
       }
-      console.log(22)
-      console.log(parent)
-      console.log(22)
       return false
     },
     resolvePath (routePath) {
+      if (isExternal(routePath)) {
+        return routePath
+      }
       return path.resolve(this.basePath, routePath)
     }
   }
