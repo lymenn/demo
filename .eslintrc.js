@@ -21,6 +21,12 @@ module.exports = {
   ],
   // add your custom rules here
   rules: {
+    "no-unused-vars": [2, { 
+      // 允许声明未使用变量
+      "vars": "local",
+      // 参数不检查
+      "args": "none" 
+    }],
     // allow async-await
     'generator-star-spacing': 'off',
     // allow debugger during development

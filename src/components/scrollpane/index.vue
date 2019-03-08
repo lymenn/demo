@@ -10,7 +10,8 @@ export default {
 </script>
 <style rel="stylesheet/scss" lang="scss" scoped>
 .scroll-container{
-    border: 1px solid red;
-    height: 49px;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
 }
 </style>

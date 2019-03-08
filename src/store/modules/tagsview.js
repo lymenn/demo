@@ -1,4 +1,4 @@
-const tagView = {
+const tagsView = {
   state: {
     visitedViews: [],
     cachedViews: []
@@ -15,6 +15,12 @@ const tagView = {
       state.cachedViews.push(Object.assign({}, view, {
         title: view.meta.title || 'no-name'
       }))
+    },
+    DEL_VISITED_VIEW: (state, view) => {
+      state.visitedViews.splice(state.visitedViews.findIndex((item) => item.path === view.path))
+    },
+    DEL_CACHED_VIEW: (state, view) => {
+      state.cachedViews.splice(state.visitedViews.findIndex((item) => item.path === view.path))
     }
   },
   actions: {
@@ -27,8 +33,18 @@ const tagView = {
     },
     addCachedView ({commit}, view) {
       commit('ADD_CACHED_VIEW', view)
+    },
+    delView ({dispatch}, view) {
+      dispatch('delVisitedView', view)
+      dispatch('delCachedView', view)
+    },
+    delVisitedView ({commit}, view) {
+      commit('DEL_VISITED_VIEW', view)
+    },
+    delCachedView ({commit}, view) {
+      commit('DEL_CACHED_VIEW', view)
     }
   }
 }
 
-export default tagView
+export default tagsView
